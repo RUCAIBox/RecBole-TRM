@@ -15,7 +15,7 @@ import torch
 from torch import nn
 
 from recbole.model.abstract_recommender import SequentialRecommender
-from recbole.model.trm_layers import TimeAwareTransformerEncoder
+from recbole.model.transformer_layers import TimeAwareTransformerEncoder
 from recbole.model.loss import BPRLoss
 
 

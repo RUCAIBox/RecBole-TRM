@@ -249,6 +249,70 @@ class LinformerAttention(nn.Module):
 
         return hidden_states
 
+
+### Common Light Layer and Encoder ###
+class LightAttentionTransformerLayer(nn.Module):
+
+    def __init__(self, config, n_heads, seq_len, hidden_size, intermediate_size,
+                 hidden_dropout_prob, attn_dropout_prob, hidden_act, layer_norm_eps):
+        super(LightAttentionTransformerLayer, self).__init__()
+        model_name = config['model']
+        if model_name == 'Linformer':
+            self.multi_head_attention = LinformerAttention(config, n_heads, seq_len, hidden_size,
+                                        hidden_dropout_prob, attn_dropout_prob, layer_norm_eps)
+        elif model_name == 'Performer':
+            self.multi_head_attention = PerformerAttention(config, n_heads, seq_len, hidden_size,
+                                        hidden_dropout_prob, attn_dropout_prob, layer_norm_eps)
+        elif model_name == 'Synthesizer':
+            self.multi_head_attention = SynthesizerAttention(n_heads, seq_len, hidden_size,
+                                        hidden_dropout_prob, attn_dropout_prob, layer_norm_eps)
+        elif model_name == 'LinearTrm':
+            self.multi_head_attention = LinearTrmAttention(n_heads, seq_len, hidden_size,
+                                        hidden_dropout_prob, attn_dropout_prob, layer_norm_eps)
+        else:
+            self.multi_head_attention = MultiHeadAttention(n_heads, seq_len, hidden_size,
+                                        hidden_dropout_prob, attn_dropout_prob, layer_norm_eps)
+        self.feed_forward = FeedForward(hidden_size, intermediate_size,
+                                         hidden_dropout_prob, hidden_act, layer_norm_eps)
+
+    def forward(self, hidden_states, attention_mask):
+        attention_output = self.multi_head_attention(hidden_states, attention_mask)
+        feedforward_output = self.feed_forward(attention_output)
+        return feedforward_output
+
+class LightAttentionTransformerEncoder(nn.Module):
+    
+    def __init__(self,
+                 config, 
+                 n_layers=2,
+                 n_heads=2,
+                 seq_len=50, 
+                 hidden_size=64,
+                 inner_size=256,
+                 hidden_dropout_prob=0.5,
+                 attn_dropout_prob=0.5,
+                 hidden_act='gelu',
+                 layer_norm_eps=1e-12):
+
+        super(LightAttentionTransformerEncoder, self).__init__()
+
+        layer = LightAttentionTransformerLayer(config, n_heads, seq_len, hidden_size, inner_size,
+                                 hidden_dropout_prob, attn_dropout_prob, hidden_act, layer_norm_eps)
+        self.layer = nn.ModuleList([copy.deepcopy(layer)
+                                    for _ in range(n_layers)])
+
+    def forward(self, hidden_states, attention_mask=None, output_all_encoded_layers=True):
+        all_encoder_layers = []
+        for layer_module in self.layer:
+            hidden_states = layer_module(hidden_states, attention_mask)
+            if output_all_encoded_layers:
+                all_encoder_layers.append(hidden_states)
+        
+        if not output_all_encoded_layers:
+            all_encoder_layers.append(hidden_states)
+        return all_encoder_layers
+
+
 ## TiSASRec
 class TimeAwareMultiHeadAttention(nn.Module):
     """
