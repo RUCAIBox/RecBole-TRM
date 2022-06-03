@@ -11,7 +11,7 @@ from recbole.data import create_dataset, data_preparation, save_split_dataloader
 from recbole.utils import init_logger, get_model, get_trainer, init_seed, set_color
 
 
-def run_recbole(model=None, dataset=None, config_file_list=None, config_dict=None, saved=True):
+def run_recbole_trm(model=None, dataset=None, config_file_list=None, config_dict=None, saved=True):
     r""" A fast running api, which includes the complete process of
     training and testing a model on a specified dataset
 

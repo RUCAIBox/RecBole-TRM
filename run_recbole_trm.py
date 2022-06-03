@@ -1,6 +1,6 @@
 import argparse
 
-from recbole.quick_start import run_recbole
+from recbole_trm.quick_start import run_recbole_trm
 
 
 if __name__ == '__main__':
@@ -12,4 +12,4 @@ if __name__ == '__main__':
     args, _ = parser.parse_known_args()
 
     config_file_list = args.config_files.strip().split(' ') if args.config_files else None
-    run_recbole(model=args.model, dataset=args.dataset, config_file_list=config_file_list)
+    run_recbole_trm(model=args.model, dataset=args.dataset, config_file_list=config_file_list)
