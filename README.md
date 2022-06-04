@@ -50,9 +50,9 @@ We list currently supported models according to category:
 
 **News Recommendation**:
 
-* **[NRMS](https://aclanthology.org/D19-1671/) ** from Wu *et al.*: [Neural News Recommendation with Multi-Head Self-Attention](https://aclanthology.org/D19-1671/) (EMNLP/IJCNLP 2019).
-* **[NAML](https://arxiv.org/abs/1907.05576) ** from Wu *et al.*: [Neural News Recommendation with Attentive Multi-View Learning](https://arxiv.org/abs/1907.05576) (IJCAI 2019).
-* **[NPA](https://arxiv.org/abs/1907.05559) ** from Wu *et al.*: [NPA: Neural News Recommendation with Personalized Attention](https://arxiv.org/abs/1907.05559) (KDD 2019).
+* [NRMS](https://aclanthology.org/D19-1671/) from Wu *et al.*: [Neural News Recommendation with Multi-Head Self-Attention](https://aclanthology.org/D19-1671/) (EMNLP/IJCNLP 2019).
+* [NAML](https://arxiv.org/abs/1907.05576) from Wu *et al.*: [Neural News Recommendation with Attentive Multi-View Learning](https://arxiv.org/abs/1907.05576) (IJCAI 2019).
+* [NPA](https://arxiv.org/abs/1907.05559) from Wu *et al.*: [NPA: Neural News Recommendation with Personalized Attention](https://arxiv.org/abs/1907.05559) (KDD 2019).
 
 ### The Team
 
