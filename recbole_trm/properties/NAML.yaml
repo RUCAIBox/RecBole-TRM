@@ -25,6 +25,7 @@ use_subcategory: True
 num_attention_heads: 20
 news_dim: 400
 news_query_vector_dim: 200
+category_emb_dim: 100
 user_query_vector_dim: 200
 user_log_length: 50
 user_log_mask: True

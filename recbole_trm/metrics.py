@@ -1,5 +1,6 @@
 from sklearn.metrics import roc_auc_score
 import numpy as np
+import logging
 
 
 def dcg_score(y_true, y_score, k=10):

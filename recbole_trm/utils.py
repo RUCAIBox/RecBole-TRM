@@ -2,6 +2,7 @@ from collections import Counter
 from tqdm import tqdm
 import torch
 import numpy as np
+import os
 import logging
 import importlib
 from nltk.tokenize import word_tokenize
@@ -97,11 +98,15 @@ def acc(y_true, y_hat):
     return hit.data.float() * 1.0 / tot
 
 
+def get_ckpt_path(config):
+    return os.path.join(config['saved_path'], f'epoch-{config["epochs"]}.pt')
+
+
 def get_module(model):
     return getattr(importlib.import_module(f'recbole_trm.model.{model.lower()}'), model)
 
 
-def train(config, dataloader, model, optimizer):
+def train(config, dataloader, model, optimizer, category_dict, subcategory_dict, word_dict):
     logging.info('Training.')
     for ep in range(config['epochs']):
         loss = 0.0
@@ -126,7 +131,7 @@ def train(config, dataloader, model, optimizer):
                         config['n_gpu'], cnt * config['batch_size'], loss.data / cnt, accuary / cnt)
                 )
 
-        ckpt_path = os.path.join(config['model_dir'], f'epoch-{ep+1}.pt')
+        ckpt_path = os.path.join(config['saved_path'], f'epoch-{ep+1}.pt')
         torch.save(
             {
                 'model_state_dict': model.state_dict(),

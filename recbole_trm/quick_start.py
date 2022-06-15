@@ -11,10 +11,11 @@ import importlib
 from recbole.config import Config
 from recbole.data import create_dataset, data_preparation, save_split_dataloaders, load_split_dataloaders
 from recbole.utils import init_logger, get_model, get_trainer, init_seed, set_color
-from recbole_trm.utils import update_dict, read_news, get_doc_input, load_matrix, get_module, train, test, collate_fn
+from recbole_trm.utils import update_dict, read_news, get_doc_input, load_matrix, get_module, train, test, collate_fn, get_ckpt_path
 from recbole_trm.data import DatasetTrain, DatasetTest, NewsDataset
 from recbole_trm.data import prepare_training_behavior_data
 from torch.utils.data import DataLoader
+from tqdm import tqdm
 
 
 def run_recbole_trm(model=None, dataset=None, config_file_list=None, config_dict=None, saved=True):
@@ -47,9 +48,10 @@ def run_recbole_trm(model=None, dataset=None, config_file_list=None, config_dict
         optimizer = optim.Adam(model.parameters(), lr=config['learning_rate'])
         if config['enable_gpu']:
             model = model.cuda(config['n_gpu'])
-        train(config, dataloader, model, optimizer)
+        train(config, dataloader, model, optimizer, category_dict, subcategory_dict, word_dict)
         # test
-        checkpoint = torch.load(config['ckpt_path'], map_location='cpu')
+        ckpt_path = get_ckpt_path(config)
+        checkpoint = torch.load(ckpt_path, map_location='cpu')
         subcategory_dict = checkpoint['subcategory_dict']
         category_dict = checkpoint['category_dict']
         word_dict = checkpoint['word_dict']
