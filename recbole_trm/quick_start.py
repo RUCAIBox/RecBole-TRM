@@ -11,6 +11,7 @@ import importlib
 from recbole.config import Config
 from recbole.data import create_dataset, data_preparation, save_split_dataloaders, load_split_dataloaders
 from recbole.utils import init_logger, get_model, get_trainer, init_seed, set_color
+from recbole_trm.utils import ModelType
 from recbole_trm.utils import update_dict, read_news, get_doc_input, load_matrix, get_module, train, test, collate_fn, get_ckpt_path
 from recbole_trm.data import DatasetTrain, DatasetTest, NewsDataset
 from recbole_trm.data import prepare_training_behavior_data
@@ -18,7 +19,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 
-def run_recbole_trm(model=None, dataset=None, config_file_list=None, config_dict=None, saved=True):
+def run_recbole_trm(model=None, dataset=None, config_file_list=None, config_dict=None, saved=True, model_type=ModelType.SEQ):
     r""" A fast running api, which includes the complete process of
     training and testing a model on a specified dataset
 
@@ -29,7 +30,7 @@ def run_recbole_trm(model=None, dataset=None, config_file_list=None, config_dict
         config_dict (dict, optional): Parameters dictionary used to modify experiment parameters. Defaults to ``None``.
         saved (bool, optional): Whether to save the model. Defaults to ``True``.
     """
-    if model in ['NRMS', 'NAML', 'NPA']:
+    if model_type == ModelType.NEWS.value:
         properties = open(r'./recbole_trm/properties/'+model+'.yaml')
         config = yaml.load(properties, Loader=yaml.FullLoader)
         init_seed(config['seed'], config['reproducibility'])

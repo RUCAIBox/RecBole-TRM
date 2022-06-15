@@ -4,7 +4,7 @@
 * **Sequential Recommendation**: TiSASRec, SSE-PT, LightSANs, gMLP, CORE
 * **News Recommendation**: NRMS, NAML, NPA
 
-### Highlights
+## Highlights
 
 * **Easy-to-use API**:
     Our library shares unified API and input (atomic files) as RecBole.
@@ -36,7 +36,7 @@ If you want to change the models or datasets, just run the script by setting add
 python run_recbole_trm.py -m [model] -d [dataset]
 ```
 
-### Implemented Models
+## Implemented Models
 
 We list currently supported models according to category:
 
@@ -54,7 +54,11 @@ We list currently supported models according to category:
 * [NAML](https://arxiv.org/abs/1907.05576) from Wu *et al.*: [Neural News Recommendation with Attentive Multi-View Learning](https://arxiv.org/abs/1907.05576) (IJCAI 2019).
 * [NPA](https://arxiv.org/abs/1907.05559) from Wu *et al.*: [NPA: Neural News Recommendation with Personalized Attention](https://arxiv.org/abs/1907.05559) (KDD 2019).
 
-### The Team
+## Experiments
+
+For more details about experiments including the hyper-parameters of the implemented models, you can refer to [[link]](experiments/README.md).
+
+## The Team
 
 RecBole-TRM is developed and maintained by members from [RUCAIBox](http://aibox.ruc.edu.cn/), the main developers are Wenqi Sun ([@wenqisun](https://github.com/wenqisun)) and Xinyan Fan ([@BELIEVEfxy](https://github.com/BELIEVEfxy)).
 

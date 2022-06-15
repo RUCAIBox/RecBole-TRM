@@ -7,6 +7,12 @@ import logging
 import importlib
 from nltk.tokenize import word_tokenize
 from recbole_trm.metrics import roc_auc_score, ndcg_score, mrr_score, get_mean, get_sum, print_metrics
+from enum import Enum
+
+
+class ModelType(Enum):
+    SEQ=0
+    NEWS=8
 
 
 def update_dict(dict, key, value=None):
