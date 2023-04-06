@@ -2,7 +2,6 @@
 
 **RecBole-TRM** is a library built upon [PyTorch](https://pytorch.org) and [RecBole](https://github.com/RUCAIBox/RecBole) for reproducing and developing recommendation algorithms based on Transformers (TRMs). Our library includes algorithms covering two major categories:
 * **Sequential Recommendation**: TiSASRec, SSE-PT, LightSANs, gMLP, CORE
-* **News Recommendation**: NRMS, NAML, NPA
 
 ## Highlights
 
@@ -47,12 +46,6 @@ We list currently supported models according to category:
 * **[LightSANs](/recbole/model/sequential_recommender/lightsans.py)** from Fan *et al.*: [Lighter and Better: Low-Rank Decomposed Self-Attention Networks for Next-Item Recommendation](https://dl.acm.org/doi/10.1145/3404835.3462978) (SIGIR 2021).
 * **[gMLP](/recbole/model/transformer_recommender/gmlp.py)** from Liu *et al.*: [Pay Attention to MLPs](https://arxiv.org/abs/2105.08050) (NeurIPS 2021).
 * **[CORE](/recbole/model/sequential_recommender/core.py)** from Hou *et al.*: [CORE: Simple and Effective Session-based Recommendation within Consistent Representation Space](https://arxiv.org/abs/2204.11067) (SIGIR 2022).
-
-**News Recommendation**:
-
-* [NRMS](https://aclanthology.org/D19-1671/) from Wu *et al.*: [Neural News Recommendation with Multi-Head Self-Attention](https://aclanthology.org/D19-1671/) (EMNLP/IJCNLP 2019).
-* [NAML](https://arxiv.org/abs/1907.05576) from Wu *et al.*: [Neural News Recommendation with Attentive Multi-View Learning](https://arxiv.org/abs/1907.05576) (IJCAI 2019).
-* [NPA](https://arxiv.org/abs/1907.05559) from Wu *et al.*: [NPA: Neural News Recommendation with Personalized Attention](https://arxiv.org/abs/1907.05559) (KDD 2019).
 
 ## Experiments
 
